@@ -3,6 +3,7 @@ var express = require('express')
 var path = require('path')
 var cookieParser = require('cookie-parser')
 var logger = require('morgan')
+const cors=require('cors');
 
 var indexRouter = require('./routes/auth')
 var usersRouter = require('./routes/users')
@@ -30,7 +31,12 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/auth', indexRouter)
 app.use('/users', usersRouter)
+const corsOptions = {
+  origin: 'http://localhost:3002/',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+};
 
+app.use(cors(corsOptions));
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404))
