@@ -3,10 +3,12 @@ import { NavLink, useNavigate  } from "react-router-dom";
 import './index.css'
 import { FaRegUserCircle } from "react-icons/fa";
 import { useEffect } from 'react';
+import { Redirect as is } from "../../utils/redirect";
 
 function UpperNav()
 {
     const navigate = useNavigate();
+
     //const loginUser = store.getState().loginUser.user;
     const loginButton= ()=>{
         return(
@@ -18,6 +20,7 @@ function UpperNav()
 
     const handleLogout= ()=>{
         localStorage.removeItem("token");
+        navigate('/auth/login')
     }
 
 
