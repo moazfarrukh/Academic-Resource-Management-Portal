@@ -22,7 +22,12 @@ mongoose
   .catch(error => {
     console.error('Error connecting to MongoDB:', error)
   })
-
+  const corsOptions = {
+    origin: '*',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  };
+  
+app.use(cors(corsOptions));
 app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
@@ -31,12 +36,8 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/auth', indexRouter)
 app.use('/users', usersRouter)
-const corsOptions = {
-  origin: 'http://localhost:3002/',
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-};
+app.use('/',indexRouter)
 
-app.use(cors(corsOptions));
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404))

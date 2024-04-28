@@ -13,22 +13,20 @@ function Register (){
     }
 
     const handleRegister = async ()=>{
-        // try {
-        //     console.log("Registering")
-        //     const response = await axios.post('http://localhost:3001/auth/register', user);
-        //     const data = response.data;
-        //     console.log("data->", data)
-        //     if (data.token) {
-        //         localStorage.setItem('token', data.token);
-        //         navigate('/');
-        //     } else {
-        //         console.log(data.error);
-        //     }
-        // } catch (error) {
-        //     console.error("Error registering:", error);
-        // }
-        const resp = await axios.get("http://localhost:3001/zain")
-        console.log(resp)
+        try {
+            console.log("Registering")
+            const response = await axios.post('http://localhost:3001/auth/register', user);
+            const data = response.data;
+            console.log("data->", data)
+            if (data.token) {
+                localStorage.setItem('token', data.token);
+                navigate('/');
+            } else {
+                console.log(data.error);
+            }
+        } catch (error) {
+            console.error("Error registering:", error);
+        }
     }
 
     return(

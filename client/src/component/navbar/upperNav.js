@@ -16,6 +16,10 @@ function UpperNav()
         )
     }
 
+    const handleLogout= ()=>{
+        localStorage.removeItem("token");
+    }
+
 
 
 
@@ -26,7 +30,7 @@ function UpperNav()
                 <li className='userDetail'>
                     <p>{ loginButton()}</p>
                     <FaRegUserCircle size={30}/>
-                    <button style={{marginLeft:'1rem'}} className='loginButton'>Logout</button>
+                    <button onClick={handleLogout} style={{marginLeft:'1rem'}} className='loginButton'>Logout</button>
                 </li>
                 
             </ul>

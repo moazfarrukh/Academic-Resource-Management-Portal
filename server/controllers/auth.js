@@ -24,7 +24,7 @@ exports.login = async (req, res) => {
         }
 
         // Generate and send a JWT token with 1 day expiry
-        const token = jwt.sign({ userId: user.id}, process.env.SECRET_KEY, { expiresIn: '1d' });
+        const token = jwt.sign({ userId: user.id,firstName:user.firstName, lastname:user.lastName, email:user.email}, process.env.SECRET_KEY, { expiresIn: '1d' });
         res.status(200).json({ token });
     } catch (error) {
         console.error(error);

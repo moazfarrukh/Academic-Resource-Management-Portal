@@ -1,6 +1,7 @@
 import {  useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import './index.css'
+import axios from 'axios';
 
 function Login (){
 
@@ -13,29 +14,22 @@ function Login (){
     const [credentials, setCredentials] = useState({email :'', password:''})
     const navigate = useNavigate();
 
-    const handleLogin = ()=>{
-        // const users = store.getState().users;
-        // console.log(users);
-
-        // const obj = users.find((o,i)=>
-        //     o.email === credentials.email && o.password === credentials.password
-        // )
-
-        // if(obj === undefined)
-        // {
-        //     setWrongAlert(wrongCredentialMsg);
-        //     setCredentials({email:'', password:''})
-        // }
-        // else
-        // {
-        //     //console.log(credentials);
-        //     dispatch({
-        //         type : 'login/loginTrue',
-        //         payload : {isLogin : true, user : obj}
-        //     })
-        //     navigate("/");
-        // }
-        console.log("Login")
+    const handleLogin = async ()=>{
+        try {
+            const response = await axios.post('http://localhost:3001/auth/login', {
+                email: credentials.email,
+                password: credentials.password
+            });
+            const data = response.data;
+            if (data.token) {
+                localStorage.setItem('token', data.token);
+                navigate('/');
+            } else {
+                console.log(data.error);
+            }
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     const handleRegister = ()=>{
