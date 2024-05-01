@@ -12,6 +12,11 @@
     position: sticky;
     top: 0;
     left: 0;
+    position: fixed; /* Set position to fixed */
+    top: 0;
+    left: 0;
+    width: 100%; /* Occupy full width */
+    z-index: 1000; /* Ensure it's above other content */
 }
 
 
@@ -57,6 +62,7 @@
     height: 92.6vh;
     position: fixed;
     left: 0;
+
 }
 
 .sideNavbar ul li

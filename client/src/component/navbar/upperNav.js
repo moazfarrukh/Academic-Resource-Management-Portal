@@ -4,9 +4,11 @@ import './index.css'
 import { FaRegUserCircle } from "react-icons/fa";
 import { useEffect } from 'react';
 import { Redirect as is } from "../../utils/redirect";
+import { useJwt } from "react-jwt";
 
 function UpperNav()
 {
+    const token = localStorage.getItem("token")
     const navigate = useNavigate();
 
     //const loginUser = store.getState().loginUser.user;
@@ -31,7 +33,8 @@ function UpperNav()
             <ul className='upperNav-ul'>
                 <li className='mainLogo'>Academic Resource Portal</li>
                 <li className='userDetail'>
-                    <p>{ loginButton()}</p>
+                    
+                    <p>{ !token && loginButton()}</p>
                     <FaRegUserCircle size={30}/>
                     <button onClick={handleLogout} style={{marginLeft:'1rem'}} className='loginButton'>Logout</button>
                 </li>
