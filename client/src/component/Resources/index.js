@@ -8,6 +8,7 @@ import { NavLink } from "react-router-dom";
 
 function Resources() {
 
+    const [findResource, setFindResource] = useState('')
     const [resources, setResources] = useState([
         {
             id:1,
@@ -60,23 +61,40 @@ function Resources() {
         },
         {
             id:8,
-            title:'Numerical Computing',
+            title:'OOP',
             description:'Past paper of numerical computing',
             media:'files',
             category:'past paper'
         }
     ])
 
+    const filteredResources = resources.filter(resource => {
+        const searchText = findResource.toLowerCase();
+        return (
+            resource.title.toLowerCase().includes(searchText) ||
+            resource.description.toLowerCase().includes(searchText) ||
+            resource.category.toLowerCase().includes(searchText)
+        );
+    });
+
     return ( 
         <>
             <Navigation/>
             <section style={{marginLeft:"16%"}}>
 
-                <div className="cards">{resources.map(resource=>{
+                <div className="resourceSearch">
+                    <input type="text" value={findResource} placeholder="Search for Resource" onChange={e=>setFindResource(e.target.value)}/>
+                    <button className="uploadResourceBtn">Upload</button>
+                </div>
+
+                <div className="cards">{filteredResources.map(resource=>{
                     return(
-                        <div key={resource.id}>
-                            <h1>{resource.title}</h1>
-                            <p>{resource.description.slice(0, 60)} ...</p>
+                        <div className="card" key={resource.id}>
+                            <section className="resourceTexts">
+                                <h1>{resource.title}</h1>
+                                <p>{resource.description.slice(0, 35)} ...</p>
+                                <p><span style={{fontWeight:"bolder"}}>Category:</span> {resource.category}</p>
+                            </section>
                             <NavLink to={`/resources/${resource.id}`} state={{resource : resource}}>
                                 <button className="viewBtn">View</button>
                             </NavLink>

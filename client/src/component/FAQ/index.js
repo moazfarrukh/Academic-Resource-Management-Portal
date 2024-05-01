@@ -4,7 +4,7 @@ function FAQ() {
     return ( 
         <>
             <Navigation/>
-            <section className="leaveSideNav">
+            <section style={{marginLeft:"16%"}}>
                     <h1>FAQs page</h1>
             </section>
         </>

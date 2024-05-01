@@ -1,3 +1,20 @@
+.resourceSearch
+{
+    padding-top: 3rem;
+    text-align: center;
+}
+
+.resourceSearch input
+{
+    width: 50%;
+    padding: 1rem;
+    font-size: 1rem;
+    border: 1.5px solid #2d3436;
+    border-radius: 45px 0 0 45px;
+    outline: none;
+    font-weight: bold;
+}
+
 .cards
 {
     display: flex;
@@ -5,6 +22,20 @@
     padding: 0 4rem;
     margin-top: 2rem;
 }
+
+.uploadResourceBtn
+{
+    background-color: #2d3436;
+    color: white;
+    padding: 1.1rem 1.5rem;
+    border: none;
+    margin-left: 0.5rem;
+    border-radius: 0 45px  45px 0;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
 
 section
 {
@@ -16,7 +47,7 @@ section
     width: 25%;
     margin: 1rem;
     height: 30vh;
-    padding: 1rem;
+    padding: 1.5rem;
     box-shadow: 0 0 15px #bdc3c7;
     border-radius: 5px;
 }
@@ -27,7 +58,7 @@ section
 }
 .cards .viewBtn, .cards .downloadBtn
 {
-    padding: 8px 2.5rem;
+    padding: 10px 2.6rem;
     outline: none;
     border: none;
     background-color: #2d3436;
@@ -35,10 +66,19 @@ section
     font-weight: bold;
     cursor: pointer;
 }
+.viewBtn:hover
+{
+    color: yellow;
+}
 .downloadBtn
 {
     margin-left: 1rem;
 }
+.resourceTexts
+{
+    transform: translateY(-4rem);
+}
+
 
 
 

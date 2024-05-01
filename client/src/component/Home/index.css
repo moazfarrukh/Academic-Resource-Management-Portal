@@ -1,5 +1,3 @@
-
-
 .leaveSideNav
 {
     margin-left: 18%;
@@ -20,4 +18,20 @@
 .loginAlert a
 {
     color: #f39c12;
+}
+
+
+.personalInfo
+{
+    font-size: 1.3rem;
+    margin: 2rem;
+    font-weight: bold;
+}
+.personalInfo p
+{
+    padding-bottom: 1rem;
+}
+
+.userUploadedResources{
+
 }

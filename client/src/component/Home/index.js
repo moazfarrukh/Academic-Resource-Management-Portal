@@ -23,8 +23,19 @@ const Home = ()=>{
 
     return(<>
         <Navigation/>
-        <section className="leaveSideNav homePage">
-            <h1>Home page</h1>
+        <section className="leaveSideNav">
+            <div className="personalInfo">
+            {decodedToken && (
+                        <>
+                            <p>Name: {`${decodedToken.firstName ? decodedToken.firstName.toUpperCase() : ''} ${decodedToken.lastName ? decodedToken.lastName.toUpperCase() : ''}`}</p>
+                            <p>Email: {decodedToken.email}</p>
+                        </>
+                    )}
+            </div>
+
+            <div className="userUploadedResources">
+                <h1>Uploaded Resources:</h1>
+            </div>
         </section>
     </>)
 }
