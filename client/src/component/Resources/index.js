@@ -48,7 +48,7 @@ function Resources() {
         {
             id:6,
             title:'Numerical Computing',
-            description:'Past paper of numerical computing',
+            description:'Past paper of Data Structures',
             media:'files',
             category:'past paper'
         },
