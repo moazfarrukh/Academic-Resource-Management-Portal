@@ -1,37 +1,73 @@
-.leaveSideNav
-{
+/* Light Mode */
+.leaveSideNav-light {
     margin-left: 18%;
     height: 90vh;
 }
 
-.homePage
-{
+.homePage-light {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.loginAlert
-{
+
+.loginAlert-light {
     font-size: 1.5rem;
 }
 
-.loginAlert a
-{
+.loginAlert-light a {
     color: #f39c12;
 }
 
-
-.personalInfo
-{
+.personalInfo-light {
     font-size: 1.3rem;
     margin: 2rem;
     font-weight: bold;
 }
-.personalInfo p
-{
+
+.personalInfo-light p {
     padding-bottom: 1rem;
 }
 
-.userUploadedResources{
+.userUploadedResources-light {
+    color: black;
+}
 
+
+/* Dark Mode */
+.leaveSideNav-dark {
+    margin-left: 18%;
+    height: 90vh;
+}
+
+.homePage-dark {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loginAlert-dark {
+    font-size: 1.5rem;
+    color: white;
+}
+
+.loginAlert-dark a {
+    color: #f39c12;
+}
+
+.personalInfo-dark {
+    font-size: 1.3rem;
+    margin: 2rem;
+    font-weight: bold;
+    color: white;
+}
+
+.personalInfo-dark p {
+    padding-bottom: 1rem;
+}
+
+.userUploadedResources-dark {
+    color: white;
+}
+.userResourceBookmarks-dark{
+    color:white
 }

@@ -1,11 +1,10 @@
-.resourceSearch
-{
+/* Light Mode */
+.resourceSearch-light {
     padding-top: 3rem;
     text-align: center;
 }
 
-.resourceSearch input
-{
+.resourceSearch-light input {
     width: 50%;
     padding: 1rem;
     font-size: 1rem;
@@ -15,16 +14,14 @@
     font-weight: bold;
 }
 
-.cards
-{
+.cards-light {
     display: flex;
     flex-wrap: wrap;
     padding: 0 4rem;
     margin-top: 2rem;
 }
 
-.uploadResourceBtn
-{
+.uploadResourceBtn-light {
     background-color: #2d3436;
     color: white;
     padding: 1.1rem 1.5rem;
@@ -36,14 +33,12 @@
     cursor: pointer;
 }
 
-
-section
-{
+section{
     overflow-y: auto;
     margin-top: 75px;
 }
-.cards div
-{
+
+.cards-light div {
     width: 25%;
     margin: 1rem;
     height: 30vh;
@@ -52,12 +47,13 @@ section
     border-radius: 5px;
 }
 
-.cards div h1, .cards div p
-{
+.cards-light div h1,
+.cards-light div p {
     padding-bottom: 10px;
 }
-.cards .viewBtn, .cards .downloadBtn
-{
+
+.cards-light .viewBtn,
+.cards-light .downloadBtn-light {
     padding: 10px 2.6rem;
     outline: none;
     border: none;
@@ -66,68 +62,56 @@ section
     font-weight: bold;
     cursor: pointer;
 }
-.viewBtn:hover
-{
+
+.viewBtn:hover {
     color: yellow;
 }
-.downloadBtn
-{
+
+.downloadBtn-light {
     margin-left: 1rem;
 }
-.resourceTexts
-{
+
+.resourceTexts-light {
     transform: translateY(-4rem);
 }
 
-
-
-
-/**************************Resource Detail page****************************/
-.resourceDetails
-{
+.resourceDetails-light {
     padding: 2rem;
 }
 
-.resourceDetails h1
-{
+.resourceDetails-light h1 {
     font-size: 4rem;
 }
 
-.resourceDetails p
-{
+.resourceDetails-light p {
     font-size: 1.2rem;
 }
 
-
-.resourceFooter
-{
+.resourceFooter-light {
     padding: 0 2rem;
     margin-top: 1.5rem;
 }
 
-.resourceAddComment
-{
-     border: 1px solid black;
-     width: 70%;
+.resourceAddComment-light {
+    border: 1px solid black;
+    width: 70%;
     margin-left: 15%;
-     display: flex;
-     flex-direction: column;
-     padding: 2rem;
-     background-color: #297fb917;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    background-color: #297fb917;
 }
 
-.resourceAddComment textarea
-{
+.resourceAddComment-light textarea {
     padding: 1rem;
     font-size: 1.1rem;
 }
-.resourceComments
-{
+
+.resourceComments-light {
     margin: 2rem 0;
 }
 
-.resourceAddComment button
-{
+.resourceAddComment-light button {
     background-color: #2d3436;
     color: white;
     border: none;
@@ -138,9 +122,158 @@ section
     cursor: pointer;
 }
 
-.resourceDetailLine
-{
+.resourceDetailLine-light {
     margin: 0 2rem;
     padding: 1px 0;
     background-color: #2d3436;
+}
+
+
+/* Dark Mode */
+.resourceSearch-dark {
+    padding-top: 3rem;
+    text-align: center;
+    background-color: #2d3436;
+    color: white;
+}
+
+.resourceSearch-dark input {
+    width: 50%;
+    padding: 1rem;
+    font-size: 1rem;
+    border: 1.5px solid #bdc3c7;
+    border-radius: 45px 0 0 45px;
+    outline: none;
+    font-weight: bold;
+    background-color: #2d3436;
+    color: white;
+}
+
+.cards-dark {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 4rem;
+    margin-top: 2rem;
+}
+
+.uploadResourceBtn-dark {
+    background-color: #bdc3c7;
+    color: #2d3436;
+    padding: 1.1rem 1.5rem;
+    border: none;
+    margin-left: 0.5rem;
+    border-radius: 0 45px  45px 0;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+section-dark {
+    overflow-y: auto;
+    margin-top: 75px;
+    background-color: #2d3436;
+    color: white;
+}
+
+.cards-dark div {
+    width: 25%;
+    margin: 1rem;
+    height: 30vh;
+    padding: 1.5rem;
+    box-shadow: 0 0 15px #2d3436;
+    border-radius: 5px;
+    background-color: #bdc3c7;
+    color: #2d3436;
+}
+
+.cards-dark div h1,
+.cards-dark div p {
+    padding-bottom: 10px;
+}
+
+.cards-dark .viewBtn,
+.cards-dark .downloadBtn-dark {
+    padding: 10px 2.6rem;
+    outline: none;
+    border: none;
+    background-color: #2d3436;
+    color: #bdc3c7;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.viewBtn-dark:hover {
+    color: yellow;
+}
+
+.downloadBtn-dark {
+    margin-left: 1rem;
+}
+
+.resourceTexts-dark {
+    transform: translateY(-4rem);
+    color: #080303;
+}
+
+.resourceDetails-dark {
+    padding: 2rem;
+    background-color: #2d3436;
+    color: white;
+}
+
+.resourceDetails-dark h1 {
+    font-size: 4rem;
+}
+
+.resourceDetails-dark p {
+    font-size: 1.2rem;
+}
+
+.resourceFooter-dark {
+    padding: 0 2rem;
+    margin-top: 1.5rem;
+    background-color: #2d3436;
+    color: white;
+}
+
+.resourceAddComment-dark {
+    border: 1px solid white;
+    width: 70%;
+    margin-left: 15%;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    background-color: #2d3436;
+    color: white;
+}
+
+.resourceAddComment-dark textarea {
+    padding: 1rem;
+    font-size: 1.1rem;
+    background-color: #2d3436;
+    color: white;
+}
+
+.resourceComments-dark {
+    margin: 2rem 0;
+    background-color: #2d3436;
+    color: white;
+}
+
+.resourceAddComment-dark button {
+    background-color: #bdc3c7;
+    color: #2d3436;
+    border: none;
+    outline: none;
+    padding: 1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.resourceDetailLine-dark {
+    margin: 0 2rem;
+    padding: 1px 0;
+    background-color: #bdc3c7;
+    color: #2d3436;
 }

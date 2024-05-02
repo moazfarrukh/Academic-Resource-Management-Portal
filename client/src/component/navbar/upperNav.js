@@ -1,47 +1,49 @@
-
-import { NavLink, useNavigate  } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import './index.css'
 import { FaRegUserCircle } from "react-icons/fa";
-import { useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Redirect as is } from "../../utils/redirect";
 import { useJwt } from "react-jwt";
+import ThemeContext from "../../contexts/themeContext";
 
-function UpperNav()
-{
-    const token = localStorage.getItem("token")
+function UpperNav() {
+    const {theme, setTheme} = useContext(ThemeContext);
+    const token = localStorage.getItem("token");
     const navigate = useNavigate();
+    const [darkMode, setDarkMode] = useState(false);
 
-    //const loginUser = store.getState().loginUser.user;
-    const loginButton= ()=>{
-        return(
+    const toggleDarkMode = () => {
+        setDarkMode(!   darkMode);
+        setTheme(darkMode ? 'light' : 'dark');
+    }
+
+    const loginButton = () => {
+        return (
             <NavLink to="/auth/login">
-                    <button className='loginButton'>Login</button>
+                <button className={`loginButton-${theme}`}>Login</button>
             </NavLink>
-        )
+        );
     }
 
-    const handleLogout= ()=>{
+    const handleLogout = () => {
         localStorage.removeItem("token");
-        navigate('/auth/login')
+        navigate('/auth/login');
     }
 
-
-
-
-    return(
+    return (
         <>
-            <ul className='upperNav-ul'>
-                <li className='mainLogo'>Academic Resource Portal</li>
-                <li className='userDetail'>
-                    
-                    <p>{ !token && loginButton()}</p>
+            <ul className={`upperNav-ul-${theme}`}>
+                <li className={`mainLogo-${theme}`}>Academic Resource Portal</li>
+                <li className={`userDetail-${theme}`}>
+                    <p>{!token && loginButton()}</p>
                     <FaRegUserCircle size={30}/>
-                    <button onClick={handleLogout} style={{marginLeft:'1rem'}} className='loginButton'>Logout</button>
+                    <button onClick={handleLogout} style={{marginLeft:'1rem'}} className={`loginButton-${theme}`}>Logout</button>
+
+                    <button onClick={toggleDarkMode} style={{marginLeft:'1rem'}} className={`loginButton-${theme}`}>{darkMode ? 'Light Mode' : 'Dark Mode'}</button>
                 </li>
-                
             </ul>
         </>
-    )
+    );
 }
 
 export default UpperNav;
