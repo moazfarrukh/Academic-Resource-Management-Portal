@@ -148,7 +148,9 @@ section{
     background-color: #2d3436;
     color: white;
 }
-
+.resourceSearch-dark input::placeholder {
+    color: white;
+}
 .cards-dark {
     display: flex;
     flex-wrap: wrap;

@@ -10,6 +10,7 @@ import FAQ from './component/FAQ'
 import ResourceDetail from './component/Resources/resourceDetail'
 import ThemeContext from './contexts/themeContext'
 import { useState } from 'react'
+import PlaylistDetail from './component/Playlists/playlistDetail'
 
 function App () {
   const [theme, setTheme] = useState('light')
@@ -31,6 +32,7 @@ function App () {
           <Route exact path='/resources/:id' element={<ResourceDetail />} />
           <Route exact path='/notifications' element={<Notifications />} />
           <Route exact path='/playlists' element={<Playlists />} />
+          <Route exact path='/playlists/:id' element={<PlaylistDetail />} />
           <Route exact path='/FAQs' element={<FAQ />} />
           <Route exact path='/peertopeer' element={<UserSettings />} />
           <Route exact path='/user/settings' element={<UserSettings />} />
