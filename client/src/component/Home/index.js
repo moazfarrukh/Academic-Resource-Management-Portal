@@ -35,6 +35,12 @@ const Home = ()=>{
 
             <div className="userUploadedResources">
                 <h1>Uploaded Resources:</h1>
+                <p>Nothing to show yet...</p>
+            </div>
+
+            <div className="userResourceBookmarks">
+                <h1>Bootmarks/Favourite Resources:</h1>
+                <p>Nothing to show yet...</p>
             </div>
         </section>
     </>)
