@@ -28,7 +28,7 @@ exports.createResource = async (req, res) => {
   let file_path = null
   let media = null
   let user_id = null
-
+  console.log(req.body)
   if (req.body.resource) {
     if (req.body.file) {
       file_path = req.body.file.path
