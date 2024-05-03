@@ -16,11 +16,6 @@ function PeerToPeer() {
             setTopics(res.data)
         })
     }
-    // axios.get('http://localhost:3001/ptp/getAllTopics')
-    // .then((res, req)=>{
-    //     console.log(res.data)
-    //     setTopics(res.data)
-    // })
     useEffect(() => {
         getAllTopics();
     }, []);

@@ -3,13 +3,15 @@ import Navigation from "../navbar/Navigation";
 import { useContext, useState } from "react";
 import ThemeContext from "../../contexts/themeContext";
 import axios from "axios";
+import { useJwt } from "react-jwt";
 
 function PeerToPeerDetail() {
     const location = useLocation();
     const [topic, setTopic] = useState(location.state.topic);
     const { theme, setTheme } = useContext(ThemeContext);
     const [addComment, setAddComment] = useState('')
-
+    const token = localStorage.getItem("token")
+    const { decodedToken, isExpired } = useJwt(token);
     // Function to append theme to class names
     const appendThemeToClassNames = (classNames) => {
         return `${classNames}-${theme}`;
@@ -19,13 +21,12 @@ function PeerToPeerDetail() {
         await axios.post('http://localhost:3001/ptp/addCommentToTopic', {
             id:topic._id,
             commentTitle:addComment,
-            author:'zain'
+            author:decodedToken.firstName
         })
         .then((res, req)=>{
             setTopic(res.data)
         })
     }
-    console.log(addComment)
     return ( 
         <>
             <Navigation/>
