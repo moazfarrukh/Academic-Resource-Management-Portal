@@ -7,11 +7,8 @@ const cors=require('cors');
 
 var indexRouter = require('./routes/auth')
 var usersRouter = require('./routes/users')
-<<<<<<< HEAD
 var resourceRouter = require('./routes/resource')
-=======
 var ptpRouter = require('./routes/ptp')
->>>>>>> ab725305116a236dd71cb98c721a6e6844e0fba7
 const mongoose = require('mongoose')
 
 var app = express()
