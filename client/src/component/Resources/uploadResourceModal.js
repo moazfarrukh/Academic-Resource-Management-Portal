@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import { Modal, Box, Typography, TextField, Button } from '@mui/material';
+import { useJwt } from 'react-jwt';
+import User from '../../../../server/models/user';
 
 const ResourceModal = ({ isOpen, onClose, onSubmit }) => {
+
+    const token = localStorage.getItem("token")
+    const { decodedToken, isExpired } = useJwt(token);
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -29,9 +34,16 @@ const ResourceModal = ({ isOpen, onClose, onSubmit }) => {
   const handleSubmit =  async (e) => {
     e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:3001/auth/login', {
+            const response = await axios.post('http://localhost:3001/resource', {
+                resource: {title: formData.title,
+                     description: formData.description,
+                     category: formData.category,
+                    user_id: decodedToken.id},
+                file: formData.file
             });
             const data = response.data;
+            console.log(data);
+            
             
            
         } catch (error) {

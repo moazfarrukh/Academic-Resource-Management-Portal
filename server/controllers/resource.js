@@ -27,6 +27,8 @@ exports.getResource = async (req, res, next) => {
 exports.createResource = async (req, res) => {
   let file_path = null
   let media = null
+  let user_id = null
+
   if (req.body.resource) {
     if (req.body.file) {
       file_path = req.body.file.path
@@ -39,13 +41,17 @@ exports.createResource = async (req, res) => {
       } else {
         media = 'document'
       }
+      if (req.body.resource.user_id) {
+        user_id = req.body.resource.user_id
+      }
     }
     const resource = new Resource({
       title: req.body.resource.title,
       description: req.body.resource.description,
       media: media,
       category: req.body.resource.category,
-      file_path: file_path
+      file_path: file_path,
+      user_id: user_id,
     })
 
     try {
