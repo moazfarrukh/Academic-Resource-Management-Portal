@@ -71,3 +71,11 @@
 .userResourceBookmarks-dark{
     color:white
 }
+
+
+
+button
+{
+    outline: none;
+    cursor: pointer;
+}
