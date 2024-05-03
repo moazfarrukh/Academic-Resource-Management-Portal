@@ -31,7 +31,7 @@ exports.createResource = async (req, res) => {
   console.log(req.body)
   if (req.body.resource) {
     if (req.body.file) {
-      file_path = req.body.file.path
+      file_path = "uploads/" + req.body.file.filename
       if (req.body.file.mimetype.startsWith('image/')) {
         media = 'image'
       } else if (req.body.file.mimetype.startsWith('video/')) {
