@@ -7,6 +7,7 @@ import { NavLink } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
 
 import ThemeContext from "../../contexts/themeContext";
+import ResourceModal from "./uploadResourceModal";
 
 function Resources() {
 
@@ -18,6 +19,21 @@ function Resources() {
     const [findResource, setFindResource] = useState('')
     const [uploadPageStatus, setUploadPageStatus] = useState(false)
     const {theme,setTheme} = useContext(ThemeContext);
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const handleOpenModal = () => {
+      setIsModalOpen(true);
+    };
+  
+    const handleCloseModal = () => {
+      setIsModalOpen(false);
+    };
+  
+    const handleSubmitResource = (formData) => {
+      console.log(formData);
+      handleCloseModal();
+    };
     const [resources, setResources] = useState([
         {
             id:1,
@@ -93,7 +109,6 @@ function Resources() {
     const handleBookmarkSign = ()=>{
         console.log("id")
     }
-
     return ( 
         <>
             <Navigation/>
@@ -101,22 +116,10 @@ function Resources() {
 
                 <div className={`resourceSearch-${theme}`}>
                     <input type="text" value={findResource} placeholder="Search for Resource" onChange={e=>setFindResource(e.target.value)}/>
-                    <button onClick={handleUploadButton} className={`uploadResourceBtn-${theme}`} >Upload</button>
+                    <button onClick={handleOpenModal} className={`uploadResourceBtn-${theme}`} >Upload</button>
                 </div>
-
-               { uploadPageStatus && <div className="uploadResourceContainer">
-                    <input type="text" placeholder="Resource Title"/>
-                    <input type="text" placeholder="Resource Description"/>
-                    <span className="submitBtns">
-                        <select id="category">
-                            <option value="Past Paper">Past Paper</option>
-                            <option value="Subject Notes">Subject Notes</option>
-                            <option value="Study Guide">Study Guide</option>
-                        </select>
-                        <button>Submit</button>
-                    </span>
-                </div>}
-
+    
+                <ResourceModal isOpen={isModalOpen} onClose={handleCloseModal} onSubmit={handleSubmitResource} />
                 <div className={`cards-${theme}`}>{filteredResources.map(resource=>{
                     return(
                         <div className="card" key={resource.id}>
