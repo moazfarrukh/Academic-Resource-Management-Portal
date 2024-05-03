@@ -160,6 +160,9 @@ section{
     padding: 0 4rem;
     margin-top: 2rem;
 }
+.card::-webkit-scrollbar {
+    display: none;
+  }
 
 .uploadResourceBtn-dark {
     background-color: #bdc3c7;

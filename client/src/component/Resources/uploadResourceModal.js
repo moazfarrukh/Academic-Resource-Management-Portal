@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import "./index.css";
-const ResourceModal = ({ isOpen, onClose, onSubmit }) => {
+import { MdOutlineCancel } from "react-icons/md";
+
+
+const ResourceModal = ({ isOpen, setIsOpen, onSubmit }) => {
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -62,6 +65,7 @@ const ResourceModal = ({ isOpen, onClose, onSubmit }) => {
     >
       <div className="modal-content">
         <h2>Submit Resource</h2>
+        <div onClick={()=>setIsOpen(false)}><MdOutlineCancel /></div>
         <form onSubmit={handleSubmit}>
           <input
             type="text"
