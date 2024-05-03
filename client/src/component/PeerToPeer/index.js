@@ -1,17 +1,43 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navigation from "../navbar/Navigation";
 import './index.css'
 import { NavLink } from "react-router-dom";
+import axios from "axios";
 
 function PeerToPeer() {
 
     const [addTopicStatus, setAddTopicStatus] = useState(false)
-    const [topics, setTopics] = useState([
-        {id:1,title:'Lorem Ipsum is simply dummy text of the printing  industry.'}, 
-        {id:2,title:'Lorem Ipsum is simply  of the printing and typesetting industry.'},
-        {id:3,title:'Lorem Ipsum is simply dummy text of the printing and typesetting '},
-        {id:4,title:'Lorem Ipsum is simply dummy text of the printing.'}
-    ])
+    const [topics, setTopics] = useState([])
+    const [addNewComment, setAddNewComment] = useState()
+    function getAllTopics(){
+        axios.get('http://localhost:3001/ptp/getAllTopics')
+        .then((res, req) => {
+            console.log(res.data)
+            setTopics(res.data)
+        })
+    }
+    // axios.get('http://localhost:3001/ptp/getAllTopics')
+    // .then((res, req)=>{
+    //     console.log(res.data)
+    //     setTopics(res.data)
+    // })
+    useEffect(() => {
+        getAllTopics();
+    }, []);
+
+
+    const handleSubmitTopic = ()=>
+    {
+        axios.post('http://localhost:3001/ptp/addNewTopic',{
+            title:addNewComment,
+            comments : []
+        })
+        .then((res, req) => {
+            getAllTopics();
+        })
+
+        setAddTopicStatus(false)
+    }
 
     return ( 
         <>
@@ -23,15 +49,15 @@ function PeerToPeer() {
                     </div>
 
                     { addTopicStatus && <div className="addPtpTopic">
-                        <input type="text" placeholder="Add a topic"/>
-                        <button>Submit</button>
+                        <input onChange={e=>setAddNewComment(e.target.value)} type="text" placeholder="Add a topic"/>
+                        <button onClick={handleSubmitTopic}>Submit</button>
                     </div>}
 
                     <div className="ptopTopics">
                         {topics.map(topic=>{
                             return(
-                                <div className="ptopTopic" key={topic.id}>
-                                    <NavLink to={`/peertopeer/${topic.id}`} state={{topic : topic}}>
+                                <div className="ptopTopic" key={topic._id}>
+                                    <NavLink to={`/peertopeer/${topic._id}`} state={{topic : topic}}>
                                         <h1>{topic.title}</h1>
                                     </NavLink>
                                 </div>
