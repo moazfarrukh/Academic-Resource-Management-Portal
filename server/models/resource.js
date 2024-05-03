@@ -5,7 +5,8 @@ const resourceSchema = new mongoose.Schema({
     description: { type: String, required: true },
     media: { type: String, required: true },
     category: { type: String, required: true },
-    file_path: { type: String}
+    file_path: { type: String},
+    user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 });
 
 const Resource = mongoose.model('Resource', resourceSchema);
