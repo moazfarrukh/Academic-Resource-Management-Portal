@@ -9,6 +9,7 @@ var indexRouter = require('./routes/auth')
 var usersRouter = require('./routes/users')
 var resourceRouter = require('./routes/resource')
 var ptpRouter = require('./routes/ptp')
+var playlistRouter = require('./routes/playlist')
 const mongoose = require('mongoose')
 
 var app = express()
@@ -41,6 +42,7 @@ app.use('/users', usersRouter)
 app.use('/',indexRouter)
 app.use('/resource', resourceRouter)
 app.use('/ptp',ptpRouter)
+app.use('/playlist',playlistRouter)
  
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
