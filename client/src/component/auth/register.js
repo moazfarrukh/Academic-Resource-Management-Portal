@@ -22,7 +22,7 @@ function Register() {
                 setValidationErrors(data.errors);
             } else if (data.token) {
                 localStorage.setItem('token', data.token);
-                navigate('/');
+                navigate('/auth/login');
             } else {
                 console.log(data.error);
             }
