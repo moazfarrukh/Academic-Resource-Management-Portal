@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Navigation from "../navbar/Navigation";
 import "./index.css"
 import { FaCloudDownloadAlt } from "react-icons/fa";
@@ -6,7 +6,7 @@ import { FaDownload } from "react-icons/fa6";
 import { NavLink } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
 
-
+import ThemeContext from "../../contexts/themeContext";
 
 function Resources() {
 
@@ -17,6 +17,7 @@ function Resources() {
     })
     const [findResource, setFindResource] = useState('')
     const [uploadPageStatus, setUploadPageStatus] = useState(false)
+    const {theme,setTheme} = useContext(ThemeContext);
     const [resources, setResources] = useState([
         {
             id:1,
@@ -98,9 +99,9 @@ function Resources() {
             <Navigation/>
             <section style={{marginLeft:"16%"}}>
 
-                <div className="resourceSearch">
+                <div className={`resourceSearch-${theme}`}>
                     <input type="text" value={findResource} placeholder="Search for Resource" onChange={e=>setFindResource(e.target.value)}/>
-                    <button onClick={handleUploadButton} className="uploadResourceBtn">{!uploadPageStatus ? 'Upload' : 'Cancel'}</button>
+                    <button onClick={handleUploadButton} className={`uploadResourceBtn-${theme}`} >Upload</button>
                 </div>
 
                { uploadPageStatus && <div className="uploadResourceContainer">
@@ -116,7 +117,7 @@ function Resources() {
                     </span>
                 </div>}
 
-                <div className="cards">{filteredResources.map(resource=>{
+                <div className={`cards-${theme}`}>{filteredResources.map(resource=>{
                     return(
                         <div className="card" key={resource.id}>
                             <section className="resourceTexts">
@@ -127,7 +128,7 @@ function Resources() {
                             <NavLink to={`/resources/${resource.id}`} state={{resource : resource}}>
                                 <button className="viewBtn">View</button>
                             </NavLink>
-                            <button className="downloadBtn"><FaDownload size={15}/></button>
+                            <button className={`downloadBtn-${theme}`}><FaDownload size={15}/></button>
                         </div>
                     )
                 })}</div>

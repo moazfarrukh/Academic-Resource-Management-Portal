@@ -3,7 +3,16 @@
     padding-top: 3rem;
     text-align: center;
 }
+.title-light {
+    text-align: center; /* Horizontal centering */
+    margin-top: 50px; /* Adjust the margin as needed for vertical centering */
+}
 
+.title-dark{
+    text-align: center; /* Horizontal centering */
+    margin-top: 50px; /* Adjust the margin as needed for vertical centering */
+    color: white;
+}
 .resourceSearch-light input {
     width: 50%;
     padding: 1rem;
@@ -75,10 +84,7 @@ section{
     transform: translateY(-4rem);
 }
 
-
-/**************************Resource Detail page****************************/
-.resourceDetails
-{
+.resourceDetails-light {
     padding: 2rem;
 }
 
