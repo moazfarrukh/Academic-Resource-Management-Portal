@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Navigation from "../navbar/Navigation";
 import "./index.css"
 import { FaCloudDownloadAlt } from "react-icons/fa";
@@ -8,6 +8,7 @@ import { FaStar } from "react-icons/fa";
 
 import ThemeContext from "../../contexts/themeContext";
 import ResourceModal from "./uploadResourceModal";
+import axios from "axios";
 
 function Resources() {
 
@@ -21,77 +22,91 @@ function Resources() {
     const {theme,setTheme} = useContext(ThemeContext);
 
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [resources, setResources] = useState([])
+
+    function getAllResources()
+    {
+        axios.get('http://localhost:3001/resource')
+        .then((res, req)=>{
+            setResources(res.data)
+        })
+    }
+
+    useEffect(()=>{
+        getAllResources()
+    }, [])
+
 
     const handleOpenModal = () => {
-      setIsModalOpen(true);
-    };
-  
-    const handleCloseModal = () => {
-      setIsModalOpen(false);
-    };
-  
-    const handleSubmitResource = (formData) => {
-      console.log(formData);
-      handleCloseModal();
-    };
-    const [resources, setResources] = useState([
-        {
-            id:1,
-            title:'Numerical Computing',
-            description:'Past paper of numerical computing',
-            media:'files',
-            category:'past paper'
-        },
-        {
-            id:2,
-            title:'Numerical Computing',
-            description:'Past paper of numerical computing',
-            media:'files',
-            category:'past paper'
-        },
-        {
-            id:3,
-            title:'Numerical Computing',
-            description:'Past paper of numerical computing',
-            media:'files',
-            category:'past paper'
-        },
-        {
-            id:4,
-            title:'Numerical Computing 2021',
-            description:'Past paper of numerical computing',
-            media:'files',
-            category:'past paper'
-        },
-        {
-            id:5,
-            title:'Numerical Computing',
-            description:'Past paper of numerical computing',
-            media:'files',
-            category:'past paper'
-        },
-        {
-            id:6,
-            title:'Numerical Computing ',
-            description:'Past paper of Data Structures',
-            media:'files',
-            category:'past paper'
-        },
-        {
-            id:7,
-            title:'Numerical Computing',
-            description:'Past paper of numerical computing Past paper of numerical computing Past paper of numerical computing',
-            media:'files',
-            category:'past paper'
-        },
-        {
-            id:8,
-            title:'OOP',
-            description:'Past paper of numerical computing',
-            media:'files',
-            category:'past paper'
-        }
-    ])
+        setIsModalOpen(true);
+      };
+    
+      const handleCloseModal = () => {
+        setIsModalOpen(false);
+      };
+    
+      const handleSubmitResource = (formData) => {
+        console.log(formData);
+        handleCloseModal();
+        getAllResources()
+      };
+    //     {
+    //         id:1,
+    //         title:'Numerical Computing',
+    //         description:'Past paper of numerical computing',
+    //         media:'files',
+    //         category:'past paper'
+    //     },
+    //     {
+    //         id:2,
+    //         title:'Numerical Computing',
+    //         description:'Past paper of numerical computing',
+    //         media:'files',
+    //         category:'past paper'
+    //     },
+    //     {
+    //         id:3,
+    //         title:'Numerical Computing',
+    //         description:'Past paper of numerical computing',
+    //         media:'files',
+    //         category:'past paper'
+    //     },
+    //     {
+    //         id:4,
+    //         title:'Numerical Computing 2021',
+    //         description:'Past paper of numerical computing',
+    //         media:'files',
+    //         category:'past paper'
+    //     },
+    //     {
+    //         id:5,
+    //         title:'Numerical Computing',
+    //         description:'Past paper of numerical computing',
+    //         media:'files',
+    //         category:'past paper'
+    //     },
+    //     {
+    //         id:6,
+    //         title:'Numerical Computing ',
+    //         description:'Past paper of Data Structures',
+    //         media:'files',
+    //         category:'past paper'
+    //     },
+    //     {
+    //         id:7,
+    //         title:'Numerical Computing',
+    //         description:'Past paper of numerical computing Past paper of numerical computing Past paper of numerical computing',
+    //         media:'files',
+    //         category:'past paper'
+    //     },
+    //     {
+    //         id:8,
+    //         title:'OOP',
+    //         description:'Past paper of numerical computing',
+    //         media:'files',
+    //         category:'past paper'
+    //     }
+    // ])
 
     const filteredResources = resources.filter(resource => {
         const searchText = findResource.toLowerCase();
@@ -116,7 +131,7 @@ function Resources() {
                     <button onClick={handleOpenModal} className={`uploadResourceBtn-${theme}`} >Upload</button>
                 </div>
     
-                <ResourceModal isOpen={isModalOpen} onClose={handleCloseModal} onSubmit={handleSubmitResource} />
+                <ResourceModal isOpen={isModalOpen} setIsOpen={setIsModalOpen} onSubmit={handleSubmitResource} />
                 <div className={`cards-${theme}`}>{filteredResources.map(resource=>{
                     return(
                         <div className="card" key={resource.id}>
