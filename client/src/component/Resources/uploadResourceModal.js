@@ -7,7 +7,7 @@ const ResourceModal = ({ isOpen, onClose, onSubmit }) => {
     description: '',
     media: '',
     category: '',
-    file_path: '',
+    file: null, // Store the uploaded file here
   });
 
   const handleChange = (e) => {
@@ -18,8 +18,28 @@ const ResourceModal = ({ isOpen, onClose, onSubmit }) => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setFormData((prevData) => ({
+      ...prevData,
+      file: file,
+    }));
+  };
+
+  const handleSubmit =  async (e) => {
     e.preventDefault();
+        try {
+            const response = await axios.post('http://localhost:3001/auth/login', {
+            });
+            const data = response.data;
+            
+           
+        } catch (error) {
+            console.error(error);
+        }
+        setUploadPageStatus(!uploadPageStatus);
+    
+
     onSubmit(formData);
   };
 
@@ -46,7 +66,14 @@ const ResourceModal = ({ isOpen, onClose, onSubmit }) => {
             value={formData.description}
             onChange={handleChange}
           />
-
+          <TextField
+            fullWidth
+            margin="normal"
+            label="Media"
+            name="media"
+            value={formData.media}
+            onChange={handleChange}
+          />
           <TextField
             fullWidth
             margin="normal"
@@ -55,15 +82,22 @@ const ResourceModal = ({ isOpen, onClose, onSubmit }) => {
             value={formData.category}
             onChange={handleChange}
           />
-          <TextField
-            fullWidth
-            margin="normal"
-            label="File Path"
-            name="file_path"
-            value={formData.file_path}
-            onChange={handleChange}
-          />
-          <Button variant="contained" color="warning" type="submit">
+          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <input
+              accept="image/*, application/pdf" // Set accepted file types
+              id="upload-file-button"
+              type="file"
+              style={{ display: 'none' }}
+              onChange={handleFileChange}
+            />
+            <label htmlFor="upload-file-button">
+              <Button variant="contained" component="span">
+                Upload File
+              </Button>
+            </label>
+            {formData.file && <Typography>{formData.file.name}</Typography>}
+          </Box>
+          <Button variant="contained" type="submit" fullWidth sx={{ bgcolor: 'black', marginTop: 2 }}>
             Submit
           </Button>
         </form>

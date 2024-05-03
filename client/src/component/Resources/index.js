@@ -102,9 +102,6 @@ function Resources() {
         );
     });
 
-    const handleUploadButton = ()=>{
-        setUploadPageStatus(!uploadPageStatus);
-    }
 
     const handleBookmarkSign = ()=>{
         console.log("id")
