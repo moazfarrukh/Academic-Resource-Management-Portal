@@ -75,7 +75,10 @@ section{
     transform: translateY(-4rem);
 }
 
-.resourceDetails-light {
+
+/**************************Resource Detail page****************************/
+.resourceDetails
+{
     padding: 2rem;
 }
 

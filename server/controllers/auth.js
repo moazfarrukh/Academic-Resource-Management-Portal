@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
-const { hashPassword,comparePasswords,generate_random_pass } = require('../utils/auth_utils');
-
+const { hashPassword, comparePasswords } = require('../utils/auth_utils');
+const { check, validationResult } = require('express-validator');
 
 exports.login = async (req, res) => {
     try {
@@ -11,8 +11,7 @@ exports.login = async (req, res) => {
             return res.status(400).json({ error: 'email or password not provided' });
         }
 
-        const user = await User.findOne({email:email})
-        console.log(user)
+        const user = await User.findOne({ email: email });
         if (!user) {
             return res.status(401).json({ error: 'Invalid email ' });
         }
@@ -24,7 +23,7 @@ exports.login = async (req, res) => {
         }
 
         // Generate and send a JWT token with 1 day expiry
-        const token = jwt.sign({ userId: user.id,firstName:user.firstName, lastname:user.lastName, email:user.email}, process.env.SECRET_KEY, { expiresIn: '1d' });
+        const token = jwt.sign({ userId: user.id, firstName: user.firstName, lastname: user.lastName, email: user.email }, process.env.SECRET_KEY, { expiresIn: '1d' });
         res.status(200).json({ token });
     } catch (error) {
         console.error(error);
@@ -34,21 +33,31 @@ exports.login = async (req, res) => {
 
 exports.register = async (req, res) => {
     try {
-        const { email, password, firstName, lastName} = req.body;
-        console.log(req.body)
-        if (!email || !password || !firstName || !lastName) {
-            return res.status(400).json({ error: 'One or more required fields are missing' });
+        // Define validation rules
+        const validationPromises = [
+            check('email').isEmail().normalizeEmail().withMessage('Invalid email address'),
+            check('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long'),
+            check('firstName').notEmpty().withMessage('First name is required'),
+            check('lastName').notEmpty().withMessage('Last name is required')
+        ];
+
+        // Run validation rules
+        await Promise.all(validationPromises.map(validation => validation.run(req)));
+
+        // Check for validation errors
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
         }
 
-
-
-        // lower case the email and also trim all the white spaces
+        // If validation passes, continue with registration logic...
+        const { email, password, firstName, lastName } = req.body;
         const newEmail = email.toLowerCase().trim();
 
         // Check if the email is already taken
-        const existingUser = await User.findOne({ where: { email } });
+        const existingUser = await User.findOne({ email: newEmail });
         if (existingUser) {
-            return res.status(400).json({ error: 'email is already taken' });
+            return res.status(400).json({ error: 'Email is already taken' });
         }
 
         const hashedPassword = hashPassword(password);
@@ -57,10 +66,9 @@ exports.register = async (req, res) => {
         const newUser = await User.create({
             email: newEmail,
             password: hashedPassword,
-            firstName,
-            lastName,
+            firstName: firstName,
+            lastName: lastName
         });
-        
 
         res.status(201).json({ message: 'Registration successful', user: newUser });
     } catch (error) {
@@ -69,7 +77,7 @@ exports.register = async (req, res) => {
     }
 };
 
+
 exports.logout = (req, res) => {
     res.status(200).json({ message: 'Logout successful' });
 };
-
