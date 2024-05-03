@@ -1,15 +1,16 @@
 import { useState } from "react";
 import Navigation from "../navbar/Navigation";
 import './index.css'
+import { NavLink } from "react-router-dom";
 
 function PeerToPeer() {
 
     const [addTopicStatus, setAddTopicStatus] = useState(false)
     const [topics, setTopics] = useState([
-        'ajhfkajhgkjdgbkjabdgkjbankdgbn', 
-        'adghnakjdghbakjldhgjahdglahnglj',
-        'salkhgnjlkadhgbdgkjabdgksbakdgba',
-        'adljghnakdjghbakjdbgkhjadbgkhabdkhgb'
+        {id:1,title:'Lorem Ipsum is simply dummy text of the printing  industry.'}, 
+        {id:2,title:'Lorem Ipsum is simply  of the printing and typesetting industry.'},
+        {id:3,title:'Lorem Ipsum is simply dummy text of the printing and typesetting '},
+        {id:4,title:'Lorem Ipsum is simply dummy text of the printing.'}
     ])
 
     return ( 
@@ -17,7 +18,7 @@ function PeerToPeer() {
             <Navigation/>
             <section style={{marginLeft:"16%"}}>
                     <div className="peertopeerHeading">
-                        <h1>Peer to Peer</h1>
+                        <h1 className="ptpMainHeading">Peer to Peer</h1>
                         <button onClick={()=>setAddTopicStatus(!addTopicStatus)}>{!addTopicStatus ? 'Add a topic' :'Cancel'}</button>
                     </div>
 
@@ -29,8 +30,10 @@ function PeerToPeer() {
                     <div className="ptopTopics">
                         {topics.map(topic=>{
                             return(
-                                <div className="ptopTopic">
-                                    <h1>{topic}</h1>
+                                <div className="ptopTopic" key={topic.id}>
+                                    <NavLink to={`/peertopeer/${topic.id}`} state={{topic : topic}}>
+                                        <h1>{topic.title}</h1>
+                                    </NavLink>
                                 </div>
                             )
                         })}
