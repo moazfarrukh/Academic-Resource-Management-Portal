@@ -7,7 +7,11 @@ const cors=require('cors');
 
 var indexRouter = require('./routes/auth')
 var usersRouter = require('./routes/users')
+<<<<<<< HEAD
+var resourceRouter = require('./routes/resource')
+=======
 var ptpRouter = require('./routes/ptp')
+>>>>>>> ab725305116a236dd71cb98c721a6e6844e0fba7
 const mongoose = require('mongoose')
 
 var app = express()
@@ -37,6 +41,8 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/auth', indexRouter)
 app.use('/users', usersRouter)
+app.use('/',indexRouter)
+app.use('/resource', resourceRouter)
 app.use('/ptp',ptpRouter)
  
 // catch 404 and forward to error handler
@@ -51,7 +57,7 @@ app.use(function (err, req, res, next) {
   res.locals.error = req.app.get('env') === 'development' ? err : {}
 
   res.status(err.status || 500)
-  res.render('error')
-})
+  res.send({'error':err})
+  })
 
 module.exports = app
