@@ -78,7 +78,61 @@ section
 {
     transform: translateY(-4rem);
 }
+.bookmarkSign
+{
+    padding-left: 1rem;
+    cursor: pointer;
+}
 
+.bookmarkSign:hover
+{
+    color: #fdcb6e;
+}
+
+.resourceTexts h1
+{
+    display: flex;
+    align-items: center;
+}
+
+.card::-webkit-scrollbar {
+    display: none;
+}
+
+.uploadResourceContainer
+{
+    box-shadow: 0 0 20px rgba(128, 128, 128, 0.137);
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    margin-left: 20%;
+    margin-top: 2rem;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 0;
+}
+
+.uploadResourceContainer input
+{
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    width: 60%;
+}
+
+.submitBtns select
+{
+    outline: none;
+    padding: 1rem;
+    margin-right: 1rem;
+}
+.submitBtns button
+{
+    padding: 1rem;
+    outline: none;
+    background-color:#2d3436;
+    color: white;
+    cursor: pointer;
+}
 
 
 
