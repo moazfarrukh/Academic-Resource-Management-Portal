@@ -12,6 +12,7 @@ import ThemeContext from './contexts/themeContext'
 import { useState } from 'react'
 import PlaylistDetail from './component/Playlists/playlistDetail'
 import PeerToPeer from './component/PeerToPeer'
+import PeerToPeerDetail from './component/PeerToPeer/peerTopeerDetail'
 
 function App () {
   const [theme, setTheme] = useState('light')
@@ -36,6 +37,7 @@ function App () {
           <Route exact path='/playlists/:id' element={<PlaylistDetail />} />
           <Route exact path='/FAQs' element={<FAQ />} />
           <Route exact path='/peertopeer' element={<PeerToPeer />} />
+          <Route exact path='/peertopeer/:id' element={<PeerToPeerDetail />} />
           <Route exact path='/user/settings' element={<UserSettings />} />
         </Routes>
       </Router>

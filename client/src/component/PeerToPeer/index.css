@@ -31,10 +31,14 @@
 {
     margin-left: 15%;
 }
+.ptopTopic a
+{
+    text-decoration: none; 
+    color: #2d3436;   
+}
 .ptopTopic h1
 {
     font-size: 2rem;
-    text-transform: capitalize;
     margin-right: 15%;
     margin-bottom: 2.5rem;
     cursor: pointer;
@@ -67,4 +71,13 @@
     outline: none;
     cursor: pointer;
 
+}
+
+
+/********************Peer to Peer Detail page *********************/
+.ptpDetailHeading
+{
+    padding: 1rem 0;
+    margin: 2rem 5rem;
+    border-bottom: 2px solid gray;
 }
