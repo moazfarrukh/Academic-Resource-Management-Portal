@@ -7,6 +7,7 @@ const cors=require('cors');
 
 var indexRouter = require('./routes/auth')
 var usersRouter = require('./routes/users')
+var ptpRouter = require('./routes/ptp')
 const mongoose = require('mongoose')
 
 var app = express()
@@ -36,7 +37,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/auth', indexRouter)
 app.use('/users', usersRouter)
-app.use('/',indexRouter)
+app.use('/ptp',ptpRouter)
  
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

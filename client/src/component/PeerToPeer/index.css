@@ -70,7 +70,12 @@
     color: white;
     outline: none;
     cursor: pointer;
+}
 
+.comments
+{
+    width: 90%;
+    margin: 1rem 2rem;
 }
 
 
