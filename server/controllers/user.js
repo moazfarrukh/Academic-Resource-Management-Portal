@@ -1,4 +1,5 @@
 const User =  require("../models/user.js");
+const Resource = require('../models/resource.js')
 // Import the necessary modules or dependencies
 
 // Define the controller function
@@ -19,5 +20,19 @@ const getUserController = async (req, res) => {
     }
 };
 
+const getUserUploadedResources = async (req, res)=>
+{
+    const {id} = req.body;
+    console.log(id)
+    try {
+        const resources = await Resource.find({user_id:id})
+        res.status(200).json(resources)
+    } catch (error) {
+        console.error("Error retrieving user:", error);
+        res.status(500).json({ error: "Failed to retrieve resources" });
+    }
+}
+
 // Export the controller function
-module.exports = getUserController;
+module.exports = { getUserController, getUserUploadedResources };
+

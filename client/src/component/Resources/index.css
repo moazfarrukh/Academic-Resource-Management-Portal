@@ -19,6 +19,7 @@
     flex-wrap: wrap;
     padding: 0 4rem;
     margin-top: 2rem;
+
 }
 
 .uploadResourceBtn-light {
@@ -41,7 +42,7 @@ section{
 .cards-light div {
     width: 25%;
     margin: 1rem;
-    height: 30vh;
+    height: 35vh;
     padding: 1.5rem;
     box-shadow: 0 0 15px #bdc3c7;
     border-radius: 5px;
@@ -192,11 +193,12 @@ section-dark {
     border-radius: 5px;
     background-color: #bdc3c7;
     color: #2d3436;
+    overflow: hidden;
 }
 
 .cards-dark div h1,
 .cards-dark div p {
-    padding-bottom: 10px;
+    padding-bottom: 5px;
 }
 
 .cards-dark .viewBtn,
@@ -208,6 +210,7 @@ section-dark {
     color: #bdc3c7;
     font-weight: bold;
     cursor: pointer;
+    
 }
 
 
