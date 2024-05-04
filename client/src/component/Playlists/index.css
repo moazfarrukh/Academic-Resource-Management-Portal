@@ -400,3 +400,13 @@ section-dark {
     font-weight: bold;
     cursor: pointer;
   }
+  .resourceHeading-light{
+    color: black;
+    margin:10px
+  }
+
+  
+  .resourceHeading-dark{
+    color: white;
+    margin:10px
+  }

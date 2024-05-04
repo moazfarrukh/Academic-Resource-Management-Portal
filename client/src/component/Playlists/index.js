@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import Navigation from '../navbar/Navigation'
 import './index.css'
 import { FaCloudDownloadAlt } from 'react-icons/fa'
@@ -6,39 +6,28 @@ import { FaDownload } from 'react-icons/fa6'
 import { NavLink } from 'react-router-dom'
 import ThemeContext from '../../contexts/themeContext'
 import PlaylistModal from './playlistUploadModal'
+import axios from 'axios'
 
 function Playlists () {
   const { theme, setTheme } = useContext(ThemeContext)
   const [findPlaylist, setFindPlaylist] = useState('')
 
-  // Assuming you have a list of playlists
-  const [playlists, setPlaylists] = useState([
-    {
-      id: 1,
-      name: 'Playlist 1',
-      description: 'Playlist 1 description'
-    },
-    {
-      id: 2,
-      name: 'Playlist 2',
-      description: 'Playlist 2 description'
-    },
-    {
-      id: 3,
-      name: 'Playlist 3',
-      description: 'Playlist 3 description'
-    }
-  ])
+  const [playlists, setPlaylists] = useState([])
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const filteredPlaylists = playlists.filter(playlist => {
-    const searchText = findPlaylist.toLowerCase();
+    const searchText = findPlaylist.toLowerCase()
     return (
       playlist.name.toLowerCase().includes(searchText) ||
       playlist.description.toLowerCase().includes(searchText)
-    );
-  });
-  
+    )
+  })
+
+  function getAllPlaylists () {
+    axios.get('http://localhost:3001/playlist').then((res, req) => {
+      setPlaylists(res.data)
+    })
+  }
 
   const handleOpenModal = () => {
     setIsModalOpen(true)
@@ -51,10 +40,15 @@ function Playlists () {
     handleCloseModal()
   }
 
+  useEffect(() => {
+    getAllPlaylists()
+  }, [])
+
   return (
     <>
       <Navigation />
       <section style={{ marginLeft: '16%' }}>
+        <h1 className={`resourceHeading-${theme}`}>Playlists</h1>
         <div className={`resourceSearch-${theme}`}>
           <input
             type='text'
@@ -76,7 +70,7 @@ function Playlists () {
         />
         <div className={`cards-${theme}`}>
           {filteredPlaylists.map(playlist => (
-            <div className='card' key={playlist.id}>
+            <div className='card' key={playlist._id}>
               <section className={`resourceTexts-${theme}`}>
                 <h1>{playlist.name}</h1>
                 <p>{playlist.description} </p>
