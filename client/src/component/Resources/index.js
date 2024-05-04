@@ -6,6 +6,7 @@ import { FaDownload } from "react-icons/fa6";
 import { NavLink } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
 
+
 import ThemeContext from "../../contexts/themeContext";
 import ResourceModal from "./uploadResourceModal";
 import axios from "axios";
@@ -77,7 +78,7 @@ function Resources() {
                 <ResourceModal isOpen={isModalOpen} setIsOpen={setIsModalOpen} onSubmit={handleSubmitResource} />
                 <div className={`cards-${theme}`}>{filteredResources.map(resource=>{
                     return(
-                        <div className="card" key={resource.id}>
+                        <div className="card" key={resource._id}>
                             <section className="resourceTexts">
                                 <h1>{resource.title}<span onClick={handleBookmarkSign} className="bookmarkSign"><FaStar /></span></h1>
                                 <p>{resource.description.slice(0, 35)} ...</p>
