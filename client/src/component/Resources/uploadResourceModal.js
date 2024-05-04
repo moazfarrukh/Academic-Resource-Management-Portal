@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import "./index.css";
 import { MdOutlineCancel } from "react-icons/md";
+import { useJwt } from 'react-jwt';
 
 
 const ResourceModal = ({ isOpen, setIsOpen, onSubmit }) => {
@@ -10,7 +11,8 @@ const ResourceModal = ({ isOpen, setIsOpen, onSubmit }) => {
     description: '',
     category: ''
   });
-
+  const token = localStorage.getItem('token');
+  const {decodedToken,isExpired} =useJwt(token);
   const [file, setFile] = useState(null);
 
   const handleChange = e => {
@@ -37,7 +39,8 @@ const ResourceModal = ({ isOpen, setIsOpen, onSubmit }) => {
           resource: JSON.stringify({
             title: formData.title,
             description: formData.description,
-            category: formData.category
+            category: formData.category,
+            user_id: decodedToken.userId
           }),
           file: file
         },
