@@ -429,3 +429,36 @@ section-dark {
   {
     padding :0.8rem;
   }
+  
+  .select-container select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding: 8px 38px 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: black;
+    font-size: 16px;
+    color: white; /* Change color to black */
+    cursor: pointer;
+    outline: none;
+  }
+  
+  .select-container select::-ms-expand {
+    display: none;
+  }
+  
+  .select-container {
+    position: relative;
+    float: right;
+    margin-right: 30px;
+  }
+  
+  .select-container svg {
+    position: absolute;
+    top: 50%;
+    right: 10px; /* Adjust as needed */
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+  
