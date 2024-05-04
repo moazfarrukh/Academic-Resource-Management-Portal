@@ -8,7 +8,6 @@ const ResourceModal = ({ isOpen, setIsOpen, onSubmit }) => {
   const [formData, setFormData] = useState({
     title: '',
     description: '',
-    media: '',
     category: ''
   });
 
@@ -64,8 +63,9 @@ const ResourceModal = ({ isOpen, setIsOpen, onSubmit }) => {
       }}
     >
       <div className="modal-content">
-        <h2>Submit Resource</h2>
-        <div onClick={()=>setIsOpen(false)}><MdOutlineCancel /></div>
+      <div className="cancel"onClick={() => setIsOpen(false)}><MdOutlineCancel /></div>
+
+        <h2 className='submit-resource'>Submit Resource</h2>
         <form onSubmit={handleSubmit}>
           <input
             type="text"
@@ -79,13 +79,6 @@ const ResourceModal = ({ isOpen, setIsOpen, onSubmit }) => {
             placeholder="Description"
             name="description"
             value={formData.description}
-            onChange={handleChange}
-          />
-          <input
-            type="text"
-            placeholder="Media"
-            name="media"
-            value={formData.media}
             onChange={handleChange}
           />
           <input
