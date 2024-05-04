@@ -100,3 +100,21 @@ exports.deleteResource = async (req, res) => {
     res.status(500).json({ message: err.message })
   }
 }
+
+exports.addCommentToResource = async(req, res)=>{
+  const {id, commentTitle, author} = req.body;
+    try {
+        const topic = await Resource.findById(id);
+        if (!topic) {
+            return res.status(404).send({ error: 'Resource not found' });
+          }
+
+        topic.comments.push({ text: commentTitle, authorName:author });
+        const updatedTopic = await topic.save();
+        res.status(200).send(updatedTopic);
+        
+    } catch (error) {
+        console.log(error)
+    }
+}
+

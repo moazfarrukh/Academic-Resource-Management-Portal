@@ -8,7 +8,6 @@ const commentSchema = new Schema({
     authorName:{
         type:String
     }
-    // You might want to include more fields like author, timestamp, etc.
   });
 
 const topicScheme = new Schema({
@@ -20,5 +19,4 @@ const topicScheme = new Schema({
 })
 
 const Topic = mongoose.model("Topic", topicScheme);
-
 module.exports = Topic;
