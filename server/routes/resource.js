@@ -16,4 +16,6 @@ router.patch('/:id', resourceController.getResource, resourceController.updateRe
 
 router.delete('/:id', resourceController.getResource, resourceController.deleteResource);
 
+router.post('/addComment', resourceController.addCommentToResource)
+
 module.exports = router;

@@ -48,7 +48,6 @@ function Playlists () {
     <>
       <Navigation />
       <section style={{ marginLeft: '16%' }}>
-        <h1 className={`resourceHeading-${theme}`}>Playlists</h1>
         <div className={`resourceSearch-${theme}`}>
           <input
             type='text'

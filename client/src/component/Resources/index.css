@@ -64,7 +64,7 @@ section{
 }
 
 .viewBtn:hover {
-    color: yellow;
+    color: white;
 }
 
 .downloadBtn-light {
@@ -210,9 +210,6 @@ section-dark {
     cursor: pointer;
 }
 
-.viewBtn-dark:hover {
-    color: yellow;
-}
 
 .downloadBtn-dark {
     margin-left: 1rem;
@@ -423,4 +420,9 @@ section-dark {
     margin-bottom: 15px;
     font-weight: bold;
     cursor: pointer;
+  }
+
+  form input
+  {
+    padding :0.8rem;
   }

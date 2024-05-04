@@ -98,7 +98,7 @@ const ResourceModal = ({ isOpen, setIsOpen, onSubmit }) => {
               type="file"
               onChange={handleFileChange}
             />
-            <label htmlFor="upload-file-button">Upload File</label>
+            <label htmlFor="upload-file-button" style={{padding:"1rem"}}>Upload File</label>
             {file && <p>{file.name}</p>}
           </div>
           <button type="submit">Submit</button>
