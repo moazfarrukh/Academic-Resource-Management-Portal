@@ -3,10 +3,10 @@ const Playlist = require('../models/playlist');
 // Create playlist controller
 const createPlaylist = async (req, res) => {
     try {
-        const { userId, name, description } = req.body;
-
+        const { user_id, name, description } = JSON.parse(req.body.playlist);
+        console.log(req.body.playlist)
         const playlist = new Playlist({
-            userId,
+            userId:user_id,
             name,
             description,
             resources: []
@@ -16,6 +16,7 @@ const createPlaylist = async (req, res) => {
 
         res.status(201).json(playlist);
     } catch (error) {
+        console.log(error)
         res.status(500).json({ error: 'Failed to create playlist' });
     }
 };

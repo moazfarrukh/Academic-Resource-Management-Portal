@@ -50,63 +50,6 @@ function Resources() {
         handleCloseModal();
         getAllResources()
       };
-    //     {
-    //         id:1,
-    //         title:'Numerical Computing',
-    //         description:'Past paper of numerical computing',
-    //         media:'files',
-    //         category:'past paper'
-    //     },
-    //     {
-    //         id:2,
-    //         title:'Numerical Computing',
-    //         description:'Past paper of numerical computing',
-    //         media:'files',
-    //         category:'past paper'
-    //     },
-    //     {
-    //         id:3,
-    //         title:'Numerical Computing',
-    //         description:'Past paper of numerical computing',
-    //         media:'files',
-    //         category:'past paper'
-    //     },
-    //     {
-    //         id:4,
-    //         title:'Numerical Computing 2021',
-    //         description:'Past paper of numerical computing',
-    //         media:'files',
-    //         category:'past paper'
-    //     },
-    //     {
-    //         id:5,
-    //         title:'Numerical Computing',
-    //         description:'Past paper of numerical computing',
-    //         media:'files',
-    //         category:'past paper'
-    //     },
-    //     {
-    //         id:6,
-    //         title:'Numerical Computing ',
-    //         description:'Past paper of Data Structures',
-    //         media:'files',
-    //         category:'past paper'
-    //     },
-    //     {
-    //         id:7,
-    //         title:'Numerical Computing',
-    //         description:'Past paper of numerical computing Past paper of numerical computing Past paper of numerical computing',
-    //         media:'files',
-    //         category:'past paper'
-    //     },
-    //     {
-    //         id:8,
-    //         title:'OOP',
-    //         description:'Past paper of numerical computing',
-    //         media:'files',
-    //         category:'past paper'
-    //     }
-    // ])
 
     const filteredResources = resources.filter(resource => {
         const searchText = findResource.toLowerCase();
