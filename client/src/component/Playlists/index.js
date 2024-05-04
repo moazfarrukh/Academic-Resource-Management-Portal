@@ -75,7 +75,7 @@ function Playlists () {
                 <p>{playlist.description} </p>
               </section>
               <NavLink
-                to={`/playlists/${playlist.id}`}
+                to={`/playlists/${playlist._id}`}
                 state={{ playlist: playlist }}
               >
                 <button className='viewBtn'>View Playlist</button>

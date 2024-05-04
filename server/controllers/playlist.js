@@ -23,22 +23,24 @@ const createPlaylist = async (req, res) => {
 
 const addToPlaylist = async (req, res) => {
     try {
-        const { playlistId, resourceId } = req.body;
-
+        const { playlistId, ResourceId } = req.body;
+        console.log(req.body)
+    
         const playlist = await Playlist.findById(playlistId);
 
-        if (!playlist) {
-            return res.status(404).json({ error: 'Playlist not found' });
+        const resourceExists = playlist.resources.includes(ResourceId)
+        if (!resourceExists) {
+
+            playlist.resources.push(ResourceId);
+            await playlist.save();
         }
-
-        playlist.resources.push(resourceId);
-        await playlist.save();
-
         res.status(200).json(playlist);
     } catch (error) {
+        console.error(error);
         res.status(500).json({ error: 'Failed to add to playlist' });
     }
 };
+
 
 const getPlaylistById = async (req, res) => {
     try {
