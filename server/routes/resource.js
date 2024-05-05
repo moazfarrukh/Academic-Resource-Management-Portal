@@ -1,5 +1,7 @@
 const express = require('express');
 const resourceController = require('../controllers/resource');
+const bookmarksController = require('../controllers/bookmarks')
+
 const { uploadResourceMiddleware } = require('../middleware/uploadFile');
 
 const router = express.Router();
@@ -17,5 +19,6 @@ router.patch('/:id', resourceController.getResource, resourceController.updateRe
 router.delete('/:id', resourceController.getResource, resourceController.deleteResource);
 
 router.post('/addComment', resourceController.addCommentToResource)
+router.post('/bookmarkResource',bookmarksController.bookmarkResource)
 
 module.exports = router;

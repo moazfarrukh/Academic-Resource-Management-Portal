@@ -51,13 +51,13 @@ function PlaylistDetail() {
                 <div className={`cards-${theme}`}>
                     {filteredResources.map(resource=>{
                         return(
-                            <div className="card" key={resource.id}>
+                            <div className="card" key={resource._id}>
                                 <section className={`resourceTexts-${theme}`}>
                                     <h1>{resource.title}</h1>
                                     <p>{resource.description.slice(0, 35)} ...</p>
                                     <p><span style={{fontWeight:"bolder"}}>Category:</span> {resource.category}</p>
                                 </section>
-                                <NavLink to={`/resources/${resource.id}`} state={{resource : resource}}>
+                                <NavLink to={`/resources/${resource._id}`} state={{resource : resource}}>
                                     <button className="viewBtn">View</button>
                                 </NavLink>
                                 <button className={`downloadBtn-${theme}`}><FaDownload size={15}/></button>

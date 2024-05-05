@@ -17,6 +17,7 @@ function ResourceDetail () {
   const [addComment, setAddComment] = useState('')
   const [playlists, setPlaylists] = useState([])
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+  const [fileContent, setFileContent] = useState('');
 
   // Function to append theme to class names
   const appendThemeToClassNames = classNames => {
@@ -62,7 +63,23 @@ function ResourceDetail () {
   useEffect(() => {
     getAllPlaylists()
   }, [])
-
+  useEffect(() => {
+    // Fetch file content when component mounts
+    if (resource.media === 'document') {
+      axios.get(`http://localhost:3001/${resource.file_path}`, { responseType: 'blob' })
+        .then((response) => {
+          // Convert the blob to a base64 string
+          const reader = new FileReader();
+          reader.readAsDataURL(response.data);
+          reader.onload = () => {
+            setFileContent(reader.result);
+          };
+        })
+        .catch((error) => {
+          console.error('Error fetching file:', error);
+        });
+    }
+  }, [resource]);
   return (
     <>
       <Navigation />
@@ -72,7 +89,12 @@ function ResourceDetail () {
         <div className={appendThemeToClassNames('resourceDetails')}>
           <h1>{resource.title}</h1>
           <p>{resource.description}</p>
-          <p>Resource will show here...</p>
+          {resource.media === 'image' && (
+            <img className='resourceDetailImage' src={`http://localhost:3001/${resource.file_path}`} alt="Resource" />
+          )}
+          {resource.media === 'document' && (
+            <embed className='resourceDetailDoc' src={fileContent}  height="400" type="application/pdf" />
+          )}
         </div>
         <hr className={appendThemeToClassNames('resourceDetailLine')}></hr>
      <div className="select-container" style={{ float: 'right', marginRight: '30px' }}>

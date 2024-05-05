@@ -37,7 +37,8 @@ function Playlists () {
     setIsModalOpen(false)
   }
   const handleSubmitPlaylist = formData => {
-    handleCloseModal()
+    handleCloseModal();
+    getAllPlaylists();
   }
 
   useEffect(() => {

@@ -12,9 +12,39 @@ import { FaDownload } from "react-icons/fa6";
 const Home = ()=>{
     const navigate = useNavigate();
     const token = localStorage.getItem("token")
-    const { decodedToken, isExpired } = useJwt(token);
+    const {decodedToken, isExpired } = useJwt(token);
     const [uploadedResources, setUploadedResources] = useState([])
+    const [bookmarkResources, setBookmarkResources] = useState([])
     const isAuth = isAuthenticate()
+    
+    function getAllUserResources()
+    {
+        axios.post('http://localhost:3001/users/getUserResources', {
+            id: "662e4dc55a2153165456e4d1" //decodedToken.userId
+        })
+        .then((res, req) => {
+            setUploadedResources(res.data); // Update state here
+        })
+        .catch(error => {
+            console.error("Error fetching data:", error);
+        });
+    }
+
+
+    function getAllUserBookmarks(id)
+    {
+        axios.post('http://localhost:3001/users/getAllBookmarks', {
+            userID: id 
+        })
+        .then((res, req) => {
+            console.log(res.data.bookmarks)
+            setBookmarkResources(res.data.bookmarks); // Update state here
+        })
+        .catch(error => {
+            console.error("Error fetching data:", error);
+        });
+    }
+    
     useEffect(()=>{
         setTimeout(() => {
             if(!isAuth)
@@ -22,17 +52,11 @@ const Home = ()=>{
                 navigate("/auth/login")
             }
           }, 1000);
-          axios.post('http://localhost:3001/users/getUserResources', {
-            id: "662e4dc55a2153165456e4d1" //decodedToken.userId
-        })
-        .then((res, req) => {
-            console.log(res.data);
-            setUploadedResources(res.data); // Update state here
-        })
-        .catch(error => {
-            console.error("Error fetching data:", error);
-        });
+        
+        getAllUserResources()
+
     }, [navigate, isAuth])
+
     
     const { theme, setTheme } = useContext(ThemeContext);
 
@@ -41,9 +65,13 @@ const Home = ()=>{
         return `${classNames}-${theme}`;
     };
 
-    // useEffect(() => {
-    //     console.log(uploadedResources);
-    // }, [uploadedResources]);
+    useEffect(() => {
+        if(decodedToken)
+        {
+            console.log(decodedToken.userId)
+            getAllUserBookmarks(decodedToken.userId)
+        }
+    }, [uploadedResources]);
 
     const handleBookmarkSign = ()=>{
         console.log("id")
@@ -83,8 +111,22 @@ const Home = ()=>{
             </div>
 
             <div className={appendThemeToClassNames("userResourceBookmarks")}>
-                <h1>Bootmarks/Favourite Resources:</h1>
-                <p>Nothing to show yet...</p>
+                <h1>Bookmarks/Favourite Resources:</h1>
+                {<div className={`cards-${theme}`}>{bookmarkResources.map(resource=>{
+                    return(
+                        <div className="card" key={resource._id}>
+                            <section className="resourceTexts">
+                                <h1>{resource.title}<span onClick={handleBookmarkSign} className="bookmarkSign"><FaStar /></span></h1>
+                                <p>{resource.description.slice(0, 35)} ...</p>
+                                <p><span style={{fontWeight:"bolder"}}>Category:</span> {resource.category}</p>
+                            </section>
+                            <NavLink to={`/resources/${resource._id}`} state={{resource : resource}}>
+                                <button className="viewBtn">View</button>
+                            </NavLink>
+                            <button className={`downloadBtn-${theme}`}><FaDownload size={15}/></button>
+                        </div>
+                    )
+                })}</div>}
             </div>
         </section>
     </>)

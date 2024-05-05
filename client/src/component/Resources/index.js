@@ -10,6 +10,7 @@ import { FaStar } from "react-icons/fa";
 import ThemeContext from "../../contexts/themeContext";
 import ResourceModal from "./uploadResourceModal";
 import axios from "axios";
+import { useJwt } from "react-jwt";
 
 function Resources() {
 
@@ -21,7 +22,8 @@ function Resources() {
     const [findResource, setFindResource] = useState('')
     const [uploadPageStatus, setUploadPageStatus] = useState(false)
     const {theme,setTheme} = useContext(ThemeContext);
-
+    const token = localStorage.getItem("token")
+    const { decodedToken, isExpired } = useJwt(token);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [resources, setResources] = useState([])
 
@@ -61,9 +63,12 @@ function Resources() {
         );
     });
 
-
-    const handleBookmarkSign = ()=>{
-        console.log("id")
+    const handleBookmarkSign = async (resourceID)=>{
+        await axios.post('http://localhost:3001/resource/bookmarkResource',{
+            userID:decodedToken.userId,
+            resourceID:resourceID
+        })
+        alert('Bookmark added successfully!')
     }
     return ( 
         <>
@@ -80,7 +85,7 @@ function Resources() {
                     return(
                         <div className="card" key={resource._id}>
                             <section className="resourceTexts">
-                                <h1>{resource.title}<span onClick={handleBookmarkSign} className="bookmarkSign"><FaStar /></span></h1>
+                                <h1>{resource.title}<span onClick={()=>handleBookmarkSign(resource._id)} className="bookmarkSign"><FaStar /></span></h1>
                                 <p>{resource.description.slice(0, 35)} ...</p>
                                 <p><span style={{fontWeight:"bolder"}}>Category:</span> {resource.category}</p>
                             </section>
