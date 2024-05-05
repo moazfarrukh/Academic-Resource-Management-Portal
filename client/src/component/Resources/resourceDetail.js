@@ -1,12 +1,13 @@
 import { useLocation } from 'react-router-dom'
 import Navigation from '../navbar/Navigation'
-import { FaStar } from 'react-icons/fa'
+import { FaStar, FaFacebook, FaTwitter, FaLinkedin } from 'react-icons/fa'
 import { useContext, useEffect, useState } from 'react'
 import ThemeContext from '../../contexts/themeContext'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { useJwt } from 'react-jwt'
+import Rating from './rating'
 
 function ResourceDetail () {
   const location = useLocation()
@@ -18,6 +19,7 @@ function ResourceDetail () {
   const [playlists, setPlaylists] = useState([])
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const [fileContent, setFileContent] = useState('');
+  const [rating, setRating] = useState();
 
   // Function to append theme to class names
   const appendThemeToClassNames = classNames => {
@@ -60,6 +62,29 @@ function ResourceDetail () {
       })
   }
 
+  const shareOnFacebook = () => {
+    const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`;
+    window.open(url, '_blank');
+  };
+
+  const shareOnTwitter = () => {
+    const url = `https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(resource.title)}`;
+    window.open(url, '_blank');
+  };
+
+  const shareOnLinkedin = () => {
+    const url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.href)}`;
+    window.open(url, '_blank');
+  };
+
+  // function getUpdatedResource(resourceID)
+  // {
+  //   axios.get(`http://localhost:3001/resource/${resourceID}`)
+  //   .then((res, req)=>{
+  //     setResource(res.data)
+  //   })
+  // }
+
   useEffect(() => {
     getAllPlaylists()
   }, [])
@@ -80,6 +105,33 @@ function ResourceDetail () {
         });
     }
   }, [resource]);
+
+
+  const handleRatingChange = async (newRating) => {
+    setRating(newRating);
+    const url = new URL(window.location.href);
+    const resourceID = url.pathname.split('/')[2];
+    await axios.post('http://localhost:3001/resource/addResourceRating', {
+      userID:decodedToken.userId,
+      resourceID:resourceID,
+      rating:newRating
+      
+    })
+    .then((res, req)=>{
+      
+        alert("Rating submitted successfully!")
+        setResource(res.data)
+    })
+    .catch((er)=>{
+      alert(er.response.data.message)
+    })
+    
+    // getUpdatedResource(resourceID);
+
+  };
+
+
+
   return (
     <>
       <Navigation />
@@ -87,7 +139,13 @@ function ResourceDetail () {
 
       <section style={{ marginLeft: '16%' }}>
         <div className={appendThemeToClassNames('resourceDetails')}>
-          <h1>{resource.title}</h1>
+          <h1>{resource.title}
+            <span className='socialMediaSign'>
+              <FaFacebook className='fbSign' size={30} onClick={shareOnFacebook} />
+              <FaTwitter className='twitterSign' size={30} onClick={shareOnTwitter} />
+              <FaLinkedin className='linkedinSign' size={30} onClick={shareOnLinkedin} />
+            </span>
+          </h1>
           <p>{resource.description}</p>
           {resource.media === 'image' && (
             <img className='resourceDetailImage' src={`http://localhost:3001/${resource.file_path}`} alt="Resource" />
@@ -113,13 +171,14 @@ function ResourceDetail () {
 
         <div className={appendThemeToClassNames('resourceFooter')}>
           <div className={appendThemeToClassNames('resourceRatting')}>
-            <h1>Rating: 4.4</h1>
+            <h1>Rating: {resource.rating_score}</h1>
             <div className={appendThemeToClassNames('ratingStars')}>
+              {/* <FaStar size={25} />
               <FaStar size={25} />
               <FaStar size={25} />
               <FaStar size={25} />
-              <FaStar size={25} />
-              <FaStar size={25} />
+              <FaStar size={25} /> */}
+              <Rating rating={rating} onRatingChange={handleRatingChange} />
             </div>
           </div>
           <div className={appendThemeToClassNames('resourceComments')}>

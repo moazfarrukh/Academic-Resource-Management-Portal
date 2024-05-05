@@ -8,9 +8,7 @@ const router = express.Router();
 
 router.get('/', resourceController.getAllResources);
 
-router.get('/:id', resourceController.getResource, (req, res) => {
-    res.json(res.resource);
-});
+router.get('/:id', resourceController.getResource);
 
 router.post('/',uploadResourceMiddleware,resourceController.createResource);
 
@@ -20,5 +18,5 @@ router.delete('/:id', resourceController.getResource, resourceController.deleteR
 
 router.post('/addComment', resourceController.addCommentToResource)
 router.post('/bookmarkResource',bookmarksController.bookmarkResource)
-
+router.post('/addResourceRating', resourceController.addResourceRating)
 module.exports = router;

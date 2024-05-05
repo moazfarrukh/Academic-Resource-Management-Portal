@@ -79,3 +79,7 @@ button
     outline: none;
     cursor: pointer;
 }
+
+section::-webkit-scrollbar {
+    display: none;
+  }

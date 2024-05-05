@@ -16,6 +16,7 @@ exports.getResource = async (req, res, next) => {
     if (resource == null) {
       return res.status(404).json({ message: 'Resource not found' })
     }
+    res.status(200).json(resource)
   } catch (err) {
     return res.status(500).json({ message: err.message })
   }
@@ -118,3 +119,32 @@ exports.addCommentToResource = async(req, res)=>{
     }
 }
 
+
+exports.addResourceRating = async(req, res)=>{
+  const { userID, resourceID, rating } = req.body;
+  console.log("-> ",rating)
+  try {
+    const resource = await Resource.findById(resourceID);
+    if (!resource) {
+        return res.status(404).json({ success: false, message: 'Resource not found.' });
+    }
+
+    if (resource.usersWhoGaveRating.includes(userID.toString())) {
+        return res.status(400).json({ success: false, message: 'You have already rated this resource.' });
+    }
+
+    resource.usersWhoGaveRating.push(userID.toString());
+
+    const totalUsers = resource.usersWhoGaveRating.length;
+    const previousRatingScore = resource.rating_score * (totalUsers - 1);
+    const newRatingScore = (previousRatingScore + rating) / totalUsers;
+    resource.rating_score = newRatingScore;
+
+    await resource.save();
+    console.log(resource)
+    res.status(200).json(resource);
+  } catch (error) {
+      console.error('Error submitting rating:', error);
+      res.status(500).json({ success: false, message: 'Failed to submit rating.' });
+  }
+}
