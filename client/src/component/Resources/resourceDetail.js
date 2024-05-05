@@ -158,7 +158,7 @@ function ResourceDetail () {
       </option>
     ))}
   </select>
-  <button onClick={()=>alert("This resource is marked as inappropriate!")}>Mark as Inappropriate!</button>
+  <button onClick={()=>alert("This resource is marked  inappropriate!")}>Mark as Inappropriate!</button>
 
 </div>
 
