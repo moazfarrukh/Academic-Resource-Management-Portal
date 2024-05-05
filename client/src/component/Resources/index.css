@@ -53,6 +53,22 @@ section{
     padding-bottom: 10px;
 }
 
+.cards-light div h1
+{
+  display: flex;
+}
+
+.cards-light div h1 span
+{
+  margin-left: auto;
+  cursor: pointer;
+}
+
+.cards-light div h1 span:hover
+{
+  color: #f39c12;
+}
+
 .cards-light .viewBtn,
 .cards-light .downloadBtn-light {
     padding: 10px 2.6rem;
@@ -78,11 +94,21 @@ section{
 
 
 /**************************Resource Detail page****************************/
-.resourceDetails
+.resourceDetails, .resourceDetails-light
 {
     padding: 2rem;
 }
 
+.resourceDetailImage
+{
+  width: 50%;
+}
+.resourceDetailDoc
+{
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 1rem;
+}
 .resourceDetails-light h1 {
     font-size: 4rem;
 }

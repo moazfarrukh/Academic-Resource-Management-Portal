@@ -1,5 +1,6 @@
 const User =  require("../models/user.js");
 const Resource = require('../models/resource.js')
+
 // Import the necessary modules or dependencies
 
 // Define the controller function
