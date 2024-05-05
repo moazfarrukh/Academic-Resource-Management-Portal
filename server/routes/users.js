@@ -8,4 +8,6 @@ router.get('/:id',userController.getUserController);
 router.post('/getUserResources', userController.getUserUploadedResources)
 router.post('/getAllBookmarks', bookmarkController.getAllBookmarks)
 
+router.patch('/updateUser', userController.updateUserDetails)
+
 module.exports = router;

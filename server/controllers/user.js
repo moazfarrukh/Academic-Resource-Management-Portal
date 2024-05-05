@@ -1,5 +1,7 @@
 const User =  require("../models/user.js");
 const Resource = require('../models/resource.js')
+const jwt = require('jsonwebtoken');
+const {hashPassword} = require('../utils/auth_utils.js')
 
 // Import the necessary modules or dependencies
 
@@ -34,6 +36,36 @@ const getUserUploadedResources = async (req, res)=>
     }
 }
 
+const updateUserDetails = async(req, res)=>{
+    const { userID, data } = req.body;
+
+    try {
+        // Find the user by ID
+        let user = await User.findById(userID);
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        
+        // Update the user data if provided
+        if (data.firstName) user.firstName = data.firstName;
+        if (data.lastName) user.lastName = data.lastName;
+        if (data.newPassword) 
+        {   
+            const hashedPassword = hashPassword(data.newPassword);
+            user.password = hashedPassword;
+        }
+
+        // Save the updated user
+        user = await user.save();
+        const token = jwt.sign({ userId: user.id, firstName: user.firstName, lastname: user.lastName, email: user.email }, process.env.SECRET_KEY, { expiresIn: '1d' });
+        res.json({ message: 'User updated successfully', token });
+    } catch (err) {
+        console.error('Error updating user:', err);
+        res.status(500).json({ message: 'Server Error' });
+    }
+}
+
 // Export the controller function
-module.exports = { getUserController, getUserUploadedResources };
+module.exports = { getUserController, getUserUploadedResources, updateUserDetails };
 

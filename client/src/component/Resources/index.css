@@ -92,6 +92,30 @@ section{
     transform: translateY(-4rem);
 }
 
+.linkedinSign
+{
+  color: #0762C8;
+  padding: 0 0.5rem;
+}
+.twitterSign
+{
+  color: #1DA1F2;
+  padding: 0 0.5rem;
+}
+.fbSign
+{
+  color: #1877F2;
+  padding: 0 0.5rem;
+}
+
+.resourceDetails-light h1 {
+  display: flex;
+}
+
+.socialMediaSign
+{
+  margin-left: auto;
+}
 
 /**************************Resource Detail page****************************/
 .resourceDetails, .resourceDetails-light

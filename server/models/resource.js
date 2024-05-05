@@ -17,6 +17,11 @@ const resourceSchema = new mongoose.Schema({
     category: { type: String, required: true },
     file_path: { type: String},
     user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    usersWhoGaveRating: {type:[String]},
+    rating_score: {
+      type: Number,
+      default: 0
+  },
     comments:[commentSchema]
 });
 
