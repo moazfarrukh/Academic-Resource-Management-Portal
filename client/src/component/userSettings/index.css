@@ -1,3 +1,19 @@
 .title-dark{
     color: white;
 }
+
+.getUserDataBlock
+{
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    margin-left: 30%;
+    padding: 1rem;
+    box-shadow: 0 30px 50px rgba(128, 128, 128, 0.411);
+}
+
+.getUserDataBlock input
+{
+    margin: 1rem;
+    padding: 1rem;
+}
