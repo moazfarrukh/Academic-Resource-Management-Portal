@@ -77,13 +77,7 @@ function ResourceDetail () {
     window.open(url, '_blank');
   };
 
-  // function getUpdatedResource(resourceID)
-  // {
-  //   axios.get(`http://localhost:3001/resource/${resourceID}`)
-  //   .then((res, req)=>{
-  //     setResource(res.data)
-  //   })
-  // }
+
 
   useEffect(() => {
     getAllPlaylists()
@@ -156,8 +150,7 @@ function ResourceDetail () {
         </div>
         <hr className={appendThemeToClassNames('resourceDetailLine')}></hr>
      <div className="select-container" style={{ float: 'right', marginRight: '30px' }}>
-  <select onChange={(e) => addToPlaylist(e.target.value)}>
-  
+  <select style={{textAlign:"center"}} onChange={(e) => addToPlaylist(e.target.value)}>
     <option value="">Add to Playlist</option>
     {playlists.map(playlist => (
       <option key={playlist._id} value={playlist._id}>
@@ -165,6 +158,7 @@ function ResourceDetail () {
       </option>
     ))}
   </select>
+  <button onClick={()=>alert("This resource is marked  inappropriate!")}>Mark as Inappropriate!</button>
 
 </div>
 
