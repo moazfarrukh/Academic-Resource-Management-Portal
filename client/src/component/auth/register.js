@@ -28,6 +28,8 @@ function Register() {
             }
         } catch (error) {
             console.error("Error registering:", error);
+        // Display an alert with the error message
+            alert(`Error registering: ${ error.response.data.error }`);
         }
     }
 
